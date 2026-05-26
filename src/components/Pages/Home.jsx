@@ -83,10 +83,9 @@ function ProductCard({ data }) {
 
       {/* Content */}
       <div className="p-6">
-        <h2 className="text-2xl font-bold mb-3">{title}</h2>
+        <h2 className="text-1xl font-bold mb-3">{title}</h2>
 
-        <p className="text-gray-600 mb-5">{data.description}</p>
-
+        <p className="text-gray-600 mb-5 max-h-20 min-h-20 overflow-hidden line-clamp-3">{data.description}</p>
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold text-blue-600">{price}</span>
 
