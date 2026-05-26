@@ -10,7 +10,8 @@ export default function Cart() {
     <section className="max-w-[1400px] mx-auto py-10 px-5">
 
   <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
-  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div className='flex gap-5 items-start'>
+  <div className="flex-[4] gap-5 flex flex-col">
 {
   cart.length>=1
   ?
@@ -22,8 +23,10 @@ export default function Cart() {
  
   
     <div>
-
-      <div className="bg-white rounded-2xl shadow-sm border p-6">
+</div>
+  </div>
+ 
+      <div className="bg-white  flex-[2]  align-items: flex-start rounded-2xl shadow-sm border p-6">
         <h2 className="text-3xl font-bold mb-6">Order Summary</h2>
         <div className="space-y-5 text-lg">
           <div className="flex justify-between">
@@ -51,9 +54,8 @@ export default function Cart() {
           Checkout
         </button>
       </div>
+      
     </div>
-  </div>
- 
 </section>
 
 
@@ -99,7 +101,7 @@ function CartRow({cartobject}){
             <button className="text-xl">+</button>
           </div>
 
-          <h3 className="text-2xl font-bold">$1499</h3>
+          <h3 className="text-2xl font-bold">${cartobject.price}</h3>
         </div>
       </div>
 
