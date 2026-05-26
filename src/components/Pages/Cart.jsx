@@ -4,14 +4,22 @@ import { decrement } from '../../redux/counterSlice'
 export default function Cart() {
 
   const dispatch = useDispatch()
+  let cart = useSelector((myStore) => myStore.cartStore.cart)
 
   return (
     <section className="max-w-[1400px] mx-auto py-10 px-5">
 
   <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-    <CartRow />
+{
+  cart.length>=1
+  ?
+  cart.map((cartobjet, index) =>  <CartRow key={index} cartobject={cartobjet} />)
+    
+     :
+     <p>No Data Found</p>
+}
+ 
   
     <div>
 
@@ -52,7 +60,7 @@ export default function Cart() {
   )
 }
 
-function CartRow(){
+function CartRow({cartobject}){
   return (
 <div className="lg:col-span-2 space-y-6">
 
@@ -61,17 +69,17 @@ function CartRow(){
         <div className="flex items-center gap-5">
 
           <img
-            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+            src={cartobject.image}
             alt=""
             className="w-32 h-32 object-contain"
           />
 
           <div>
             <h2 className="text-xl font-semibold max-w-xl">
-              Nike Shoes Premium Edition
+              {cartobject.title}| ${cartobject.price}
             </h2>
             <p className="text-gray-500 mt-2">
-              Stylish and comfortable shoes for everyday use.
+              {cartobject.description}
             </p>
  
             <div className="flex gap-6 mt-4">
@@ -87,7 +95,7 @@ function CartRow(){
 
           <div className="flex items-center gap-4 border rounded-lg px-4 py-2">
             <button className="text-xl">-</button>
-            <span className="font-semibold">2</span>
+            <span className="font-semibold">{cartobject.qty}</span>
             <button className="text-xl">+</button>
           </div>
 
