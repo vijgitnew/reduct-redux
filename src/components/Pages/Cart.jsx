@@ -1,23 +1,11 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { decrement } from '../../redux/counterSlice'
-import { catchRejection } from './../../../node_modules/@reduxjs/toolkit/src/listenerMiddleware/utils';
-
 export default function Cart() {
 
   const dispatch = useDispatch()
 
   return (
-    // <div>
-
-    //   <button
-    //     className="p-3 bg-red-500 text-white"
-    //     onClick={() => dispatch(decrement())}
-    //   >
-    //     Decrement
-    //   </button>
-
-    // </div>
     <section className="max-w-[1400px] mx-auto py-10 px-5">
 
   <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>

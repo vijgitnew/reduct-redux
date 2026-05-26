@@ -4,10 +4,10 @@ import { increment } from "../../redux/counterSlice";
 import axios from "axios";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { addTocart } from "../../redux/cartSlice";
+import { addTocart, deleteCart } from "../../redux/cartSlice";
 import { ToastContainer, toast } from "react-toastify";
-import { createStore } from "./../../../node_modules/redux/src/createStore";
-
+import Swal from "sweetalert2";
+import "sweetalert2/src/sweetalert2.scss";
 export default function Home() {
   const dispatch = useDispatch();
   const [product, setProduct] = useState([]);
@@ -53,6 +53,29 @@ function ProductCard({ data }) {
     dispatch(addTocart({ cartObj }));
     toast.success("Item Added in Cart");
   };
+  let removeCart = () => {
+    dispatch(deleteCart({ id }));
+
+    Swal.fire({
+      title: "Are you sure you want to delete",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteCart({ id }));
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  };
   return (
     <div className="w-80 bg-white rounded-3xl shadow-lg overflow-hidden hover:scale-105 duration-300">
       {/* Image */}
@@ -68,7 +91,10 @@ function ProductCard({ data }) {
           <span className="text-2xl font-bold text-blue-600">{price}</span>
 
           {checkItemincart ? (
-            <button className="bg-red-500 text-white px-5 py-2 rounded-xl">
+            <button
+              className="bg-red-500 text-white px-5 py-2 rounded-xl"
+              onClick={removeCart}
+            >
               Remove Cart
             </button>
           ) : (
