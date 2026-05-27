@@ -80,7 +80,7 @@ function CartRow({cartobject}){
             <h2 className="text-xl font-semibold max-w-xl">
               {cartobject.title}| ${cartobject.price}
             </h2>
-            <p className="text-gray-500 mt-2 max-h-96 truncate">
+            <p className="text-gray-500 mt-2">
               {cartobject.description}
             </p>
  
