@@ -15,11 +15,21 @@ export let cartSlice = createSlice({
     },
     deleteCart: (state, reqData) => {
       let { id } = reqData.payload;
-      state.cart = state.cart.filter((item) => item.id !== id)
-      localStorage.setItem("CART", JSON.stringify(state.cart));;
+      state.cart = state.cart.filter((item) => item.id !== id);
+      localStorage.setItem("CART", JSON.stringify(state.cart));
     },
-    changeQty: (state) => {},
+    ChangeQty: (state, action) => {
+      let { id, finalQty } = action.payload;
+
+      state.cart = state.cart.map((obj) => {
+        if (obj.id === id) {
+          obj.qty = finalQty;
+        }
+        return obj;
+      });
+        localStorage.setItem("CART", JSON.stringify(state.cart));
+    },
   },
 });
-export const { addTocart, deleteCart, changeQty } = cartSlice.actions;
+export const { addTocart, deleteCart, ChangeQty } = cartSlice.actions;
 export default cartSlice.reducer;
